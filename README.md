@@ -371,7 +371,7 @@ int main(){
 	    exit(EXIT_FAILURE);
 	  }
 
-	  if ((chdir("/")) < 0) {
+	  if ((chdir("/home/sea/Documents/Sisop/Modul_2/makanan")) < 0) {
 	    exit(EXIT_FAILURE);
 	  }
 
@@ -380,28 +380,22 @@ int main(){
 	  close(STDERR_FILENO);	
 	  
 	  while (1){
-		sleep(5);
 
 		FILE *f;
         	struct stat filestat;
 		char fp[255]="makan_enak.txt";
-		char ext[20]=".txt";
 		char baru[255];
 		long int act,ctm,sub;
 		
         	stat(fp,&filestat);
-		act = filestat.st_atime;
+		time_t act = filestat.st_atime;
 		ctm = time(NULL);
-		sub = act-ctm;	
-
-		printf("%ld\n",act);
-		printf("%ld\n",ctm);
-
-	
+		sub = ctm - act;	
+		
 		int i=1;
 		if(sub<30){
 				
-			for(int a=1; a>0; a++){
+			while(1){
 				sprintf(baru,"Makan_sehat%d.txt",i);
 				if(fopen(baru,"r")==0){
 					f=fopen(baru,"w+");
@@ -411,6 +405,7 @@ int main(){
 			}
 		
 		}
+		sleep (5);
 
 	   }
 	
@@ -536,6 +531,23 @@ int main() {
 	memset (pathh, 0 ,sizeof (pathh));
   
 }
+}
+
+```
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <error.h>
+#include <signal.h>
+#include <unistd.h>
+#include <syslog.h>
+
+int main()
+{
+        char *argv[3]= {"killall","soal5",NULL};
+        execv ("/usr/bin/killall",argv);
 }
 
 ```
